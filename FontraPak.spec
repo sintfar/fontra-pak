@@ -102,9 +102,6 @@ else:
     exe = EXE(
         pyz,
         a.scripts,
-        a.binaries,
-        a.zipfiles,
-        a.datas,
         [],
         name="Fontra Pak",
         debug=False,
@@ -112,7 +109,6 @@ else:
         strip=False,
         upx=True,
         upx_exclude=[],
-        runtime_tmpdir=None,
         console=False,
         disable_windowed_traceback=False,
         argv_emulation=False,
@@ -120,4 +116,14 @@ else:
         codesign_identity=None,
         entitlements_file=None,
         icon="icon/FontraIcon.ico",
+    )
+    coll = COLLECT(
+        exe,
+        a.binaries,
+        a.zipfiles,
+        a.datas,
+        strip=False,
+        upx=True,
+        upx_exclude=[],
+        name="Fontra Pak",
     )
