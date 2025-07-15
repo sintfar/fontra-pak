@@ -554,7 +554,6 @@ def main():
         queue.put(None)
         thread.join()
         os.kill(serverProcess.pid, signal.SIGINT)
-        serverProcess.join(timeout=1)
 
     app.aboutToQuit.connect(cleanup)
 
