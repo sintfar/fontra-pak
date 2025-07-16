@@ -147,7 +147,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: FontraPakWindows
-          path: ./dist/*.exe
+          path: "./dist/Fontra Pak"
 
   upload-to-download-server:
     runs-on: ubuntu-latest
@@ -164,7 +164,7 @@ jobs:
       - name: Zip Windows Artifact
         run: |
           cd ./downloaded-artifact/FontraPakWindows
-          zip -q FontraPak.zip "Fontra Pak.exe"
+          zip -qr FontraPak.zip "Fontra Pak"
 
       - name: Display structure of downloaded files
         run: ls -R
