@@ -103,6 +103,7 @@ else:
         pyz,
         a.scripts,
         [],
+        exclude_binaries=True,
         name="Fontra Pak",
         debug=False,
         bootloader_ignore_signals=False,
