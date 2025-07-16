@@ -105,6 +105,7 @@ else:
         [],
         exclude_binaries=True,
         name="Fontra Pak",
+        contents_directory="lib",
         debug=False,
         bootloader_ignore_signals=False,
         strip=False,
@@ -126,5 +127,5 @@ else:
         strip=False,
         upx=True,
         upx_exclude=[],
-        name="Fontra Pak",
+        name="Fontra Pak"
     )
