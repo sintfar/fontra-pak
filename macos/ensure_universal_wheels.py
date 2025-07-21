@@ -31,7 +31,7 @@ from packaging.utils import parse_wheel_filename
 
 python_versions = [
     f"cp{sys.version_info.major}{minor}"
-    for minor in range(8, sys.version_info.minor + 1)
+    for minor in range(6, sys.version_info.minor + 1)
 ]
 python_versions.reverse()
 
