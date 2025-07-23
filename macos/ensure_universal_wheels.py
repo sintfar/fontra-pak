@@ -31,7 +31,7 @@ from packaging.utils import parse_wheel_filename
 
 python_versions = [
     f"cp{sys.version_info.major}{minor}"
-    for minor in range(8, sys.version_info.minor + 1)
+    for minor in range(6, sys.version_info.minor + 1)
 ]
 python_versions.reverse()
 
@@ -121,6 +121,10 @@ def main():
                 file_descriptor
                 for file_descriptor in data["urls"]
                 if file_descriptor["python_version"] == python_version
+                and any(
+                    "macos" in tag.platform
+                    for tag in parse_wheel_filename(file_descriptor["filename"])[3]
+                )
             ]
             if file_descriptors:
                 break
@@ -133,8 +137,9 @@ def main():
             ]
 
         for file_descriptor in file_descriptors:
-            wheel_filename = file_descriptor["filename"]
-            package, version, build, tags = parse_wheel_filename(wheel_filename)
+            package, version, build, tags = parse_wheel_filename(
+                file_descriptor["filename"]
+            )
             if any("macosx" in tag.platform for tag in tags):
                 if any("universal2" in tag.platform for tag in tags):
                     universal_wheels.append(file_descriptor["url"])

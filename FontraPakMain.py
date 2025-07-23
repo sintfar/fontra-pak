@@ -12,6 +12,7 @@ import webbrowser
 from contextlib import aclosing
 from urllib.parse import quote
 
+import psutil
 from fontra import __version__ as fontraVersion
 from fontra.backends import getFileSystemBackend, newFileSystemBackend
 from fontra.backends.copy import copyFont
@@ -553,7 +554,12 @@ def main():
     def cleanup():
         queue.put(None)
         thread.join()
-        os.kill(serverProcess.pid, signal.SIGINT)
+        process = psutil.Process(serverProcess.pid)
+        for p in [process] + process.children(recursive=True):
+            if sys.platform != "win32":
+                p.send_signal(psutil.signal.SIGINT)
+            else:
+                p.terminate()
 
     app.aboutToQuit.connect(cleanup)
 
